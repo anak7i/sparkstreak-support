@@ -1,15 +1,22 @@
-# SparkStreak Support
+<div align="center">
 
-Thank you for using SparkStreak!
+<img src="https://em-content.zobj.net/source/microsoft-teams/337/sparkles_2728.png" alt="SparkStreak Logo" width="80" height="80" />
 
-If you encounter any technical issues, bugs, suggestions, or need assistance, please contact us via:
+# <span style="color:#ff9900;">SparkStreak Support</span>
 
-- **Support Email**:  
-  [dailyspark@163.com](mailto:dailyspark@163.com)
+---
 
-We will respond to your email as soon as possible.  
+Thank you for using <b>SparkStreak</b>!
+
+If you encounter any <b>technical issues</b>, <b>bugs</b>, have <b>suggestions</b>, or need <b>assistance</b>, please contact us:
+
+📧 <b>Support Email:</b> <a href="mailto:dailyspark@163.com">dailyspark@163.com</a>
+
+We will respond to your email as soon as possible.<br>
 Thank you for your support and understanding!
 
 ---
 
-SparkStreak Team 
+<i>SparkStreak Team</i>
+
+</div> 
