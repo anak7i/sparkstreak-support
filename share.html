@@ -64,52 +64,6 @@
         }
     </style>
     <script>
-        // 多语言文案
-        const i18n = {
-            zh: {
-                title: '下载本应用',
-                desc: '正在为你检测设备并跳转到应用商店…<br>如未自动跳转，请手动选择：',
-                appstore: 'App Store',
-                play: 'Google Play'
-            },
-            en: {
-                title: 'Download the app',
-                desc: 'Detecting your device and redirecting to the app store...<br>If not redirected, please choose manually:',
-                appstore: 'App Store',
-                play: 'Google Play'
-            }
-        };
-        
-        function getLang() {
-            // 优先检测浏览器语言设置
-            const languages = navigator.languages || [navigator.language || navigator.userLanguage || 'en'];
-            
-            for (let lang of languages) {
-                lang = lang.toLowerCase();
-                // 检测中文（包括简体、繁体、香港、台湾等）
-                if (lang.startsWith('zh') || lang.startsWith('zh-cn') || lang.startsWith('zh-tw') || lang.startsWith('zh-hk')) {
-                    return 'zh';
-                }
-            }
-            
-            // 默认返回英文
-            return 'en';
-        }
-        
-        function setLang() {
-            const lang = getLang();
-            document.getElementById('title').innerHTML = i18n[lang].title;
-            document.getElementById('desc').innerHTML = i18n[lang].desc;
-            document.getElementById('appstore').innerHTML = i18n[lang].appstore;
-            document.getElementById('play').innerHTML = i18n[lang].play;
-            
-            // 设置页面标题
-            document.title = i18n[lang].title;
-            
-            // 设置html的lang属性
-            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-        }
-        
         function getStoreUrl() {
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             if (/android/i.test(ua)) {
@@ -123,11 +77,9 @@
         }
         
         function jump() {
-            setLang();
             var url = getStoreUrl();
-            setTimeout(function() {
-                window.location.href = url;
-            }, 1800);
+            // 立即跳转
+            window.location.href = url;
         }
         
         // 页面加载时立即执行
@@ -141,13 +93,13 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="title">下载本应用</h1>
+        <h1>Download App / 下载应用</h1>
         <div class="qrcode-box">
             <img class="qrcode-img" src="https://api.qrserver.com/v1/create-qr-code/?size=104x104&data=https%3A%2F%2Fanak7i.github.io%2Fsparkstreak-support%2Fshare.html" alt="二维码">
         </div>
-        <div class="desc" id="desc">正在为你检测设备并跳转到应用商店…<br>如未自动跳转，请手动选择：</div>
-        <a class="btn" id="appstore" href="https://apps.apple.com/us/app/sparkstreak/id6748314914">App Store</a>
-        <a class="btn" id="play" href="https://play.google.com/store/apps/details?id=com.routine.track">Google Play</a>
+        <div class="desc">Redirecting to app store...<br>正在跳转到应用商店...</div>
+        <a class="btn" href="https://apps.apple.com/us/app/sparkstreak/id6748314914">App Store</a>
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.routine.track">Google Play</a>
     </div>
 </body>
 </html> 
