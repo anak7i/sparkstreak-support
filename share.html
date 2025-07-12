@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载本应用</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            max-width: 280px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 24px 10px 18px 10px;
+            border-radius: 14px;
+            backdrop-filter: blur(6px);
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px 4px 0 4px;
+            padding: 8px 18px;
+            border-radius: 6px;
+            background: #fff;
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 15px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn:hover {
+            background: #764ba2;
+            color: #fff;
+        }
+        .desc {
+            margin-top: 12px;
+            color: #f3eaff;
+            font-size: 13px;
+        }
+        .qrcode-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 8px;
+            margin: 0 auto 10px auto;
+            width: 120px;
+            height: 120px;
+        }
+        .qrcode-img {
+            width: 104px;
+            height: 104px;
+        }
+    </style>
+    <script>
+        // 多语言文案
+        const i18n = {
+            zh: {
+                title: '下载本应用',
+                desc: '正在为你检测设备并跳转到应用商店…<br>如未自动跳转，请手动选择：',
+                appstore: 'App Store',
+                play: 'Google Play'
+            },
+            en: {
+                title: 'Download the app',
+                desc: 'Detecting your device and redirecting to the app store...<br>If not redirected, please choose manually:',
+                appstore: 'App Store',
+                play: 'Google Play'
+            }
+        };
+        
+        function getLang() {
+            // 优先检测浏览器语言设置
+            const languages = navigator.languages || [navigator.language || navigator.userLanguage || 'en'];
+            
+            for (let lang of languages) {
+                lang = lang.toLowerCase();
+                // 检测中文（包括简体、繁体、香港、台湾等）
+                if (lang.startsWith('zh') || lang.startsWith('zh-cn') || lang.startsWith('zh-tw') || lang.startsWith('zh-hk')) {
+                    return 'zh';
+                }
+            }
+            
+            // 默认返回英文
+            return 'en';
+        }
+        
+        function setLang() {
+            const lang = getLang();
+            document.getElementById('title').innerHTML = i18n[lang].title;
+            document.getElementById('desc').innerHTML = i18n[lang].desc;
+            document.getElementById('appstore').innerHTML = i18n[lang].appstore;
+            document.getElementById('play').innerHTML = i18n[lang].play;
+            
+            // 设置页面标题
+            document.title = i18n[lang].title;
+            
+            // 设置html的lang属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        }
+        
+        function getStoreUrl() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            if (/android/i.test(ua)) {
+                return 'https://play.google.com/store/apps/details?id=com.routine.track';
+            }
+            if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                return 'https://apps.apple.com/us/app/sparkstreak/id6748314914';
+            }
+            // 其它平台默认跳转 Google Play
+            return 'https://play.google.com/store/apps/details?id=com.routine.track';
+        }
+        
+        function jump() {
+            setLang();
+            var url = getStoreUrl();
+            setTimeout(function() {
+                window.location.href = url;
+            }, 1800);
+        }
+        
+        // 页面加载时立即执行
+        window.onload = jump;
+        
+        // 如果页面已经加载完成，立即执行
+        if (document.readyState === 'complete') {
+            jump();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">下载本应用</h1>
+        <div class="qrcode-box">
+            <img class="qrcode-img" src="https://api.qrserver.com/v1/create-qr-code/?size=104x104&data=https%3A%2F%2Fanak7i.github.io%2Fsparkstreak-support%2Fshare.html" alt="二维码">
+        </div>
+        <div class="desc" id="desc">正在为你检测设备并跳转到应用商店…<br>如未自动跳转，请手动选择：</div>
+        <a class="btn" id="appstore" href="https://apps.apple.com/us/app/sparkstreak/id6748314914">App Store</a>
+        <a class="btn" id="play" href="https://play.google.com/store/apps/details?id=com.routine.track">Google Play</a>
+    </div>
+</body>
+</html> 
